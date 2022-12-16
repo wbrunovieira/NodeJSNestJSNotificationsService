@@ -11,10 +11,11 @@ describe('Cancel notification', () => {
     const notification = makeNotification();
 
     await notificationsRepository.create(notification);
-
+    console.log('notification', notification);
     await cancelNotification.execute({
       notificationId: notification.id,
     });
+    console.log(notificationsRepository.notifications[0].canceledAt);
 
     expect(notificationsRepository.notifications[0].canceledAt).toEqual(
       expect.any(Date),
